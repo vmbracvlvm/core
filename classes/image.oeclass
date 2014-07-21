@@ -83,6 +83,7 @@ set_stage[emit] += "do_rstage"
 
 RSTAGE_FIXUP_FUNCS ?= ""
 
+do_deploy[nostamp] = "1"
 # Local Variables:
 # mode: python
 # End:
