@@ -754,10 +754,13 @@ class OEliteRunQueue:
             ))
 
         for task in tasks:
+            task_obj = self.cookbook.get_task(id=task)
+            if task_obj.nostamp:
+                if self.config.get("ASSUME_WORKDIR"):
+                    continue
             self.dbc.execute(
                 "UPDATE runq.depend SET parent_task=NULL WHERE parent_task=?",
                 (task,))
-
         return
 
 
