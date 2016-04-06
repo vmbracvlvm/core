@@ -306,7 +306,7 @@ do_install_perf () {
 		bindir=${bindir} WERROR=0
 }
 PACKAGES:>USE_kernel_perf += " ${PN}-perf ${PN}-perf-doc ${PN}-perf-scripts"
-FILES_${PN}-perf = "${bindir}/perf ${bindir}/trace \
+FILES_${PN}-perf = "${bindir}/perf ${bindir}/trace ${libdir}/traceevent \
 	${sysconfdir}/bash_completion.d/perf"
 DEPENDS_${PN}-perf += "libpthread librt libm libgcc-s libc libdl"
 RDEPENDS_${PN}-perf += "libpthread librt libm libgcc-s libc libdl"
