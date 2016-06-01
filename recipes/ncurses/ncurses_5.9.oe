@@ -2,6 +2,8 @@ LICENSE = "MIT"
 
 require ncurses.inc
 
+SRC_URI += "file://ncurses-5.9-gcc-5.patch"
+
 # Local Variables:
 # mode: python
 # End:
