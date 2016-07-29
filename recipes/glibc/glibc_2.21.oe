@@ -19,6 +19,8 @@ SRC_URI_powerpc_32bit_addr:>TARGET_CPU_powerpc	= " file://powerpc_fPIC.patch;str
 SRC_URI += "file://rootsbindir.patch"
 EXTRA_OECONF += "libc_cv_rootsbindir=${base_sbindir}"
 
+LICENSE = "LGPL-2.1+"
+
 LIBRARY_VERSION_glibc-libc = "6"
 LIBRARY_VERSION_glibc-libm = "6"
 LIBRARY_VERSION_glibc-librt = "1"
