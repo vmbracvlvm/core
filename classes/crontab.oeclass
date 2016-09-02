@@ -6,6 +6,21 @@
 ## combined to one crontab config file. Crontab is enabled using the use flag
 ## crontab.
 ##
+## USE_<name>_crontab set when command is called
+## CRONTAB_USER_<name> set crontab user
+## CRONTAB_FILE_<name> set name of crontab file (default is <name> from USE flag)
+## USE_crontab enable/disable crontab
+## crontabdir set crontab install path (see conf/crontab.conf)
+##
+## If crontab is enabled 'crond' needs to be provided.
+##
+## Example:
+##>·>·DISTRO_USE_crontab = "1"
+##
+##>·>·CRONTAB_USER_logrotate = "root"
+##>·>·RECIPE_FLAGS += " logrotate_crontab"
+##>·>·DEFAULT_USE_logrotate_crontab = "0 * * * *"
+##
 ## @useflag crontab Set if you want crontab to be enabled
 
 require conf/crontab.conf
