@@ -114,8 +114,22 @@ def get_setup_file(config, distro, release):
     setup_file = oelite.path.which(oepath, os.path.join('setup', distro))
     return retval(setup_file)
 
+def check_release_from_file(file, pattern=""):
+    try:
+        logging.debug("Checking for distro %s in %s", pattern, file)
+        if (os.path.exists(file) and
+            os.path.isfile(file)):
+            if (len(pattern) == 0): return True
+            release_info = open(file, 'r').read()
+            return (re.findall(pattern, release_info) > 0)
+    except:
+        logging.debug("Error while handling release file")
+
+    return False
+
 def get_host_distro():
     logging.debug("Running host distribution detection")
+
     logging.debug("Searching for lsb_release information")
     # try lsb-release which is the most widely available method
     logging.debug("Checking for the lsb_release binary")
@@ -145,6 +159,27 @@ def get_host_distro():
 
     logging.debug("No lsb_release information available")
     logging.debug("Checking for other known host distributions")
+
+    logging.debug("Checking for Ubuntu 16.04")
+    if (check_release_from_file("/etc/lsb-release", "Ubuntu 16.04")):
+        return "ubuntu", "16.04"
+
+    logging.debug("Checking for Ubuntu 15.10")
+    if (check_release_from_file("/etc/lsb-release", "Ubuntu 15.10")):
+        return "ubuntu", "15.10"
+
+    logging.debug("Checking for Ubuntu 15.04")
+    if (check_release_from_file("/etc/lsb-release", "Ubuntu 15.04")):
+        return "ubuntu", "15.04"
+
+    logging.debug("Checking for Debian 8")
+    if (check_release_from_file("/etc/debian_version", "8\..*")):
+        return "debian", "8"
+
+    logging.debug("Checking for Debian 7")
+    if (check_release_from_file("/etc/debian_version", "7\..*")):
+        return "debian", "7"
+
     logging.debug("Checking for Exherbo")
     if (os.path.exists("/etc/exherbo-release") and
         os.path.isfile("/etc/exherbo-release")):
